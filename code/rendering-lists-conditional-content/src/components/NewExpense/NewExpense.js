@@ -17,6 +17,7 @@ const NewExpense = (props) => {
     console.log(enteredExpenseData);
     console.log(expenseData);
     props.onAddExpense(expenseData);
+    setEditing(false);
   }
 
   const startEditingHandler = () => {
