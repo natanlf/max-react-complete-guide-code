@@ -1,6 +1,7 @@
 import { useState } from "react";
 import UserInput from "./UserInput";
-
+import UserList from "./UserList";
+import Card from '../../UI/Card';
 
 const Users = () => {
 
@@ -17,7 +18,12 @@ const Users = () => {
     }
 
     return (
-        <UserInput onAddUser={addUserHandler}/>
+        <div>
+            <UserInput onAddUser={addUserHandler}/>
+            <Card>
+                <UserList list={users}/>
+            </Card>
+        </div>
     );
 }
 

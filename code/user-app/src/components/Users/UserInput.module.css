@@ -1,8 +1,6 @@
 .user-form {
-    margin: 2rem auto;
-    padding: 1rem;
-    width: 90%;
-    max-width: 40rem;
+    background-color: dimgrey;
+    color: aliceblue;
 }
 
 .form-control {
