@@ -17,11 +17,23 @@ const Users = () => {
         
     }
 
+    const onDeleteItemHandler = id => {
+        setUsers(prevUsers => prevUsers.filter(item => item.id !== id));
+    }
+
+    let content = <span>The list of users is empty</span>
+
+    if(users.length > 0) {
+        content = (
+            <UserList list={users} onDeleteItem={onDeleteItemHandler}/>
+        );
+    }
+
     return (
         <div>
             <UserInput onAddUser={addUserHandler}/>
             <Card>
-                <UserList list={users}/>
+                {content}
             </Card>
         </div>
     );

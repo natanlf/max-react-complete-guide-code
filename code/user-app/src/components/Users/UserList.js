@@ -9,6 +9,7 @@ const UserList = props => {
                     <UserItem
                     key={item.id}
                     id={item.id}
+                    onDelete={props.onDeleteItem}
                 >
                     <span>
                         {`${item.name} - ${item.age} years old`}
