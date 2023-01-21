@@ -6,14 +6,14 @@ import Button from "../../UI/Button";
 
 const UserInput = props => {
 
-    const [enteredName, setEnteredName] = useState('');
-    const [enteredAge, setAge] = useState('');
+    const [name, setEnteredName] = useState('');
+    const [age, setAge] = useState('');
     const [nameIsValid, setNameIsValid] = useState(true);
     const [ageIsValid, setAgeIsValid] = useState(true);
 
     const nameChangeHandler = event => {
         setEnteredName(event.target.value);
-        if(enteredName.trim().length === 0) {
+        if(name.trim().length === 0) {
           setNameIsValid(false)  
         } else {
             setNameIsValid(true);
@@ -22,16 +22,21 @@ const UserInput = props => {
 
     const ageChangeHandler = event => {
         setAge(event.target.value);
-        enteredAge.trim().length === 0 ? setAgeIsValid(false) : setAgeIsValid(true);
+        age.trim().length === 0 ? setAgeIsValid(false) : setAgeIsValid(true);
     }
 
     const submitHandler = event => {
         event.preventDefault();
-        console.log(enteredName)
-        if(enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
+        console.log(name)
+        if(name.trim().length === 0 || age.trim().length === 0) {
             console.log("Formulário inválido");
             return;
         }
+
+        props.onAddUser({
+            name,
+            age
+        }); //emit to father
     }
 
     return (
