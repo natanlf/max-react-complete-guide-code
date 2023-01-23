@@ -12,7 +12,7 @@ const UserList = props => {
                     onDelete={props.onDeleteItem}
                 >
                     <span>
-                        {`${item.name} - ${item.age} years old`}
+                        {`${item.name} - ${item.age} years old - ID : ${item.id}`}
                     </span>
                     </UserItem>
                 </ul>
