@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import styles from './UserInput.module.css';
 import Card from "../../UI/Card";
 import Button from "../../UI/Button";
@@ -56,7 +56,7 @@ const UserInput = props => {
     }
 
     return (
-        <div>
+        <Fragment>
             {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
             <Card className={styles['user-form']}>
                 <form onSubmit={submitHandler}>
@@ -71,7 +71,7 @@ const UserInput = props => {
                     <Button type='submit'>Add User</Button>
                 </form>
             </Card>
-        </div>
+        </Fragment>
     );
 }
 

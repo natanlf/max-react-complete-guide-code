@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import UserInput from "./UserInput";
 import UserList from "./UserList";
 import Card from '../../UI/Card';
-import Wrapper from "../Helpers/Wrapper";
 
 const Users = () => {
 
@@ -31,12 +30,12 @@ const Users = () => {
     }
 
     return (
-        <Wrapper>
+        <Fragment>
              <UserInput onAddUser={addUserHandler}/>
             <Card>
                 {content}
             </Card>
-        </Wrapper>
+        </Fragment>
     );
 }
 
