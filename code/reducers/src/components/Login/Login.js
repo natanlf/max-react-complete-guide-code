@@ -20,11 +20,7 @@ const Login = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log('RUN EVERY TIMES THAT COMPONENT FUNCTION RERUNS');
-  });
-
-  useEffect(() => {
+  /*useEffect(() => {
     const identifier = setTimeout(() => {
       console.log('useEffects checking validation')
       setFormIsValid(
@@ -36,14 +32,22 @@ const Login = (props) => {
       console.log('CLEANUP');
       clearTimeout(identifier);
     }
-  },[enteredEmail, enteredPassword])
+  },[enteredEmail, enteredPassword]); */
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+
+    setFormIsValid(
+      enteredEmail.includes('@') && enteredPassword.trim().length > 6
+    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
+
+    setFormIsValid(
+      enteredEmail.includes('@') && enteredPassword.trim().length > 6
+    );
   };
 
   const validateEmailHandler = () => {
