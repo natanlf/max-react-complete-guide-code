@@ -12,6 +12,19 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
+    console.log('EFFECT RUNNING');
+    console.log('RUN ONLY  ON TIME THE PAGE IS LOADED');
+
+    return () => {
+      console.log('EFFECT CLEANUP');
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('RUN EVERY TIMES THAT COMPONENT FUNCTION RERUNS');
+  });
+
+  useEffect(() => {
     const identifier = setTimeout(() => {
       console.log('useEffects checking validation')
       setFormIsValid(
