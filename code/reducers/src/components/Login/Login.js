@@ -12,11 +12,18 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
-  },[enteredEmail, enteredPassword]) /*every time the dependencies change we will check if the form is valid. No dependencies, we use useEffect only in
-  component initial load */
+    const identifier = setTimeout(() => {
+      console.log('useEffects checking validation')
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    }, 500); //using debounce and we can cleanup the timer
+
+    return () => {
+      console.log('CLEANUP');
+      clearTimeout(identifier);
+    }
+  },[enteredEmail, enteredPassword])
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
