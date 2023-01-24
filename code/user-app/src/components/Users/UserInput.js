@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useRef } from "react";
 import styles from './UserInput.module.css';
 import Card from "../../UI/Card";
 import Button from "../../UI/Button";
@@ -6,29 +6,16 @@ import ErrorModal from "../../UI/ErrorModal";
 
 const UserInput = props => {
 
-    const [name, setEnteredName] = useState('');
-    const [age, setAge] = useState('');
-    const [nameIsValid, setNameIsValid] = useState(true);
-    const [ageIsValid, setAgeIsValid] = useState(true);
+    const nameInputRef = useRef();
+    const ageInputRef = useRef();
+
     const [error, setError] = useState();
-
-    const nameChangeHandler = event => {
-        setEnteredName(event.target.value);
-        if(name.trim().length === 0) {
-          setNameIsValid(false)  
-        } else {
-            setNameIsValid(true);
-        } 
-    }
-
-    const ageChangeHandler = event => {
-        setAge(event.target.value);
-        age.trim().length === 0 ? setAgeIsValid(false) : setAgeIsValid(true);
-    }
 
     const submitHandler = event => {
         event.preventDefault();
-        console.log(name)
+        const name = nameInputRef.current.value;
+        const age = ageInputRef.current.value;
+
         if(name.trim().length === 0 || age.trim().length === 0) {
             setError({
                 title: 'Invalid input',
@@ -49,6 +36,9 @@ const UserInput = props => {
             name,
             age
         }); //emit to father
+
+        nameInputRef.current.value = '';
+        ageInputRef.current.value = '';
     }
 
     const errorHandler = () => {
@@ -60,13 +50,13 @@ const UserInput = props => {
             {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
             <Card className={styles['user-form']}>
                 <form onSubmit={submitHandler}>
-                    <div className={`${styles['form-control']} ${!nameIsValid && styles.invalid}`}>
+                    <div className={`${styles['form-control']}`}>
                         <label>Name</label>
-                        <input type="text" onChange={nameChangeHandler}/>
+                        <input type="text" ref={nameInputRef}/>
                     </div>
-                    <div className={`${styles['form-control']} ${!ageIsValid && styles.invalid}`}>
+                    <div className={`${styles['form-control']}`}>
                         <label>Age</label>
-                        <input type="number" onChange={ageChangeHandler} />
+                        <input type="number" ref={ageInputRef}/>
                     </div>
                     <Button type='submit'>Add User</Button>
                 </form>
