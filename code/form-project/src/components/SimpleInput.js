@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const SimpleInput = (props) => {
 
@@ -8,6 +8,12 @@ const SimpleInput = (props) => {
   const nameIsValid = name.trim() != '';
   const nameInputIsInvalid = !nameIsValid && nameIsTouched;
 
+  let formIsValid = false;
+
+  if(nameIsValid) {
+    formIsValid = true;
+  }
+  
   /* every time that this input changes, the component will be re-executed, because of this nameIsValid will be always the current value */
   const nameInputChangeHandler = event => {
     console.log(event.target.value)
@@ -49,7 +55,7 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
