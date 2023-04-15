@@ -4,6 +4,7 @@
 
 # dependencies
 /node_modules
+/code/form-project/node_modules
 /.pnp
 .pnp.js
 

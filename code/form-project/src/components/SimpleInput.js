@@ -5,12 +5,18 @@ const SimpleInput = (props) => {
   const [name, setName] = useState('');
   const [nameIsTouched, setNameIsTouched] = useState(false);
 
-  const nameIsValid = name.trim() != '';
+  const [email, setEmail] = useState('');
+  const [emailIsTouched, setEmailIsTouched] = useState(false);
+
+  const nameIsValid = name.trim() !== '';
   const nameInputIsInvalid = !nameIsValid && nameIsTouched;
+
+  const emailIsValid = email.includes('@');
+  const emailInputIsInvalid = !emailIsValid && emailIsTouched;
 
   let formIsValid = false;
 
-  if(nameIsValid) {
+  if(nameIsValid && emailIsValid) {
     formIsValid = true;
   }
   
@@ -20,8 +26,17 @@ const SimpleInput = (props) => {
     setName(event.target.value);
   }
 
-  const nameBluerHandler = event => {
+  const emailInputChangeHandler = event => {
+    console.log(event.target.value);
+    setEmail(event.target.value);
+  }
+
+  const nameBlurHandler = event => {
     setNameIsTouched(true);
+  }
+
+  const emailBlurHandler = event => {
+    setEmailIsTouched(true);
   }
 
   const formSubmitHandler = event => {
@@ -41,6 +56,7 @@ const SimpleInput = (props) => {
 
   
   const nameInputClasses = nameInputIsInvalid ? 'form-control invalid': 'form-control';
+  const emailInputClasses = emailInputIsInvalid ? 'form-control invalid': 'form-control';
 
   return (
     <form onSubmit={formSubmitHandler}>
@@ -49,9 +65,19 @@ const SimpleInput = (props) => {
         <input
           onChange={nameInputChangeHandler} 
           type='text' id='name' value={name}
-          onBlur={nameBluerHandler} />
+          onBlur={nameBlurHandler} />
         {nameInputIsInvalid && (
           <p className='error-text'>Name must not be empty.</p>
+        )}
+      </div>
+      <div className={emailInputClasses}>
+        <label htmlFor='email'>Your email</label>
+        <input
+          onChange={emailInputChangeHandler} 
+          type='email' id='email' value={email}
+          onBlur={emailBlurHandler} />
+        {emailInputIsInvalid && (
+          <p className='error-text'>Please enter a valid email.</p>
         )}
       </div>
       <div className="form-actions">
